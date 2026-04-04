@@ -1,39 +1,46 @@
 <!DOCTYPE html>
-<html lang="de">
+<html lang="en">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>AIO Tech Solution</title>
   <style>
+    :root {
+      --bg: #050505;
+      --bg-soft: #0b0b0b;
+      --panel: rgba(255, 255, 255, 0.03);
+      --panel-2: rgba(255, 255, 255, 0.05);
+      --border: rgba(255, 255, 255, 0.10);
+      --border-strong: rgba(255, 255, 255, 0.18);
+      --text: #f4f4f4;
+      --muted: rgba(255, 255, 255, 0.62);
+      --muted-2: rgba(255, 255, 255, 0.40);
+      --accent: #ffffff;
+      --max-width: 1320px;
+      --radius: 24px;
+      --shadow: 0 20px 60px rgba(0, 0, 0, 0.35);
+      --transition: 220ms ease;
+    }
+
     * {
       box-sizing: border-box;
       margin: 0;
       padding: 0;
     }
 
-    :root {
-      --bg: #0b1020;
-      --bg-soft: #11182d;
-      --card: rgba(255, 255, 255, 0.08);
-      --card-border: rgba(255, 255, 255, 0.12);
-      --text: #f5f7ff;
-      --muted: #b7c0d8;
-      --primary: #66b3ff;
-      --primary-2: #7ef0ff;
-      --accent: #7c5cff;
-      --shadow: 0 20px 50px rgba(0, 0, 0, 0.35);
-      --radius: 20px;
-      --max-width: 1200px;
+    html {
+      scroll-behavior: smooth;
     }
 
     body {
-      font-family: Arial, Helvetica, sans-serif;
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
       background:
-        radial-gradient(circle at top left, rgba(124, 92, 255, 0.25), transparent 30%),
-        radial-gradient(circle at top right, rgba(102, 179, 255, 0.22), transparent 25%),
-        linear-gradient(135deg, #09101f 0%, #0f1630 45%, #0a1224 100%);
+        radial-gradient(circle at top center, rgba(255,255,255,0.08), transparent 22%),
+        radial-gradient(circle at 50% 20%, rgba(255,255,255,0.04), transparent 35%),
+        linear-gradient(180deg, #030303 0%, #060606 30%, #050505 100%);
       color: var(--text);
-      line-height: 1.6;
+      line-height: 1.5;
+      letter-spacing: -0.01em;
     }
 
     a {
@@ -46,384 +53,589 @@
       margin: 0 auto;
     }
 
+    .section {
+      padding: 72px 0;
+    }
+
+    .section-header {
+      margin-bottom: 28px;
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 8px 14px;
+      border: 1px solid var(--border);
+      border-radius: 999px;
+      color: var(--muted);
+      background: rgba(255,255,255,0.02);
+      font-size: 0.86rem;
+      margin-bottom: 18px;
+    }
+
+    .eyebrow::before {
+      content: "";
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: #ffffff;
+      display: inline-block;
+      box-shadow: 0 0 16px rgba(255,255,255,0.6);
+    }
+
+    .section-title {
+      font-size: clamp(2rem, 5vw, 4rem);
+      line-height: 1.02;
+      letter-spacing: -0.04em;
+      margin-bottom: 14px;
+      max-width: 900px;
+    }
+
+    .section-subtitle {
+      max-width: 760px;
+      color: var(--muted);
+      font-size: 1.02rem;
+    }
+
     header {
       position: sticky;
       top: 0;
-      z-index: 10;
-      backdrop-filter: blur(14px);
-      background: rgba(11, 16, 32, 0.65);
-      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+      z-index: 30;
+      backdrop-filter: blur(18px);
+      background: rgba(5,5,5,0.72);
+      border-bottom: 1px solid rgba(255,255,255,0.06);
     }
 
     .nav {
       display: flex;
-      justify-content: space-between;
       align-items: center;
-      padding: 18px 0;
+      justify-content: space-between;
+      min-height: 76px;
+      gap: 24px;
     }
 
-    .logo {
-      font-size: 1.25rem;
-      font-weight: 700;
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-size: 0.98rem;
+      font-weight: 600;
       letter-spacing: 0.08em;
+      text-transform: uppercase;
+      white-space: nowrap;
     }
 
-    .logo span {
-      color: var(--primary-2);
+    .brand-mark {
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      background: #ffffff;
+      box-shadow: 0 0 28px rgba(255,255,255,0.8);
     }
 
     .nav-links {
       display: flex;
+      align-items: center;
       gap: 28px;
       color: var(--muted);
-      font-size: 0.95rem;
+      font-size: 0.94rem;
+    }
+
+    .nav-links a {
+      transition: color var(--transition);
     }
 
     .nav-links a:hover {
       color: var(--text);
     }
 
-    .hero {
-      padding: 90px 0 70px;
-    }
-
-    .hero-grid {
-      display: grid;
-      grid-template-columns: 1.2fr 0.8fr;
-      gap: 40px;
+    .nav-actions {
+      display: flex;
       align-items: center;
+      gap: 12px;
     }
 
-    .eyebrow {
-      display: inline-block;
-      padding: 8px 14px;
-      border: 1px solid rgba(126, 240, 255, 0.25);
-      background: rgba(126, 240, 255, 0.08);
-      color: var(--primary-2);
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 46px;
+      padding: 0 18px;
       border-radius: 999px;
-      font-size: 0.85rem;
+      border: 1px solid var(--border);
+      font-weight: 600;
+      transition: transform var(--transition), background var(--transition), border-color var(--transition), color var(--transition);
+      cursor: pointer;
+    }
+
+    .btn:hover {
+      transform: translateY(-1px);
+    }
+
+    .btn-primary {
+      background: #ffffff;
+      color: #050505;
+      border-color: #ffffff;
+    }
+
+    .btn-primary:hover {
+      background: #e9e9e9;
+    }
+
+    .btn-secondary {
+      background: rgba(255,255,255,0.03);
+      color: var(--text);
+    }
+
+    .btn-secondary:hover {
+      background: rgba(255,255,255,0.08);
+      border-color: var(--border-strong);
+    }
+
+    .hero {
+      padding: 56px 0 88px;
+    }
+
+    .hero-shell {
+      position: relative;
+      overflow: hidden;
+      border: 1px solid var(--border);
+      border-radius: 36px;
+      background:
+        radial-gradient(circle at 50% 0%, rgba(255,255,255,0.10), transparent 30%),
+        linear-gradient(180deg, rgba(255,255,255,0.03), rgba(255,255,255,0.015));
+      box-shadow: var(--shadow);
+    }
+
+    .hero-shell::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background:
+        linear-gradient(rgba(255,255,255,0.03) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,0.03) 1px, transparent 1px);
+      background-size: 44px 44px;
+      mask-image: radial-gradient(circle at center, black 35%, transparent 85%);
+      pointer-events: none;
+      opacity: 0.25;
+    }
+
+    .hero-inner {
+      position: relative;
+      z-index: 1;
+      padding: 84px 48px 42px;
+    }
+
+    .hero-top {
+      display: grid;
+      grid-template-columns: 1.15fr 0.85fr;
+      gap: 40px;
+      align-items: end;
+      margin-bottom: 64px;
+    }
+
+    .hero-title {
+      font-size: clamp(3rem, 8vw, 7rem);
+      line-height: 0.95;
+      letter-spacing: -0.065em;
+      max-width: 900px;
       margin-bottom: 20px;
     }
 
-    .hero h1 {
-      font-size: clamp(2.4rem, 5vw, 4.6rem);
-      line-height: 1.08;
-      margin-bottom: 20px;
+    .hero-title span {
+      color: rgba(255,255,255,0.54);
     }
 
-    .hero h1 .gradient {
-      background: linear-gradient(90deg, var(--primary), var(--primary-2), #ffffff);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
-    }
-
-    .hero p {
+    .hero-description {
+      max-width: 700px;
+      font-size: 1.08rem;
       color: var(--muted);
-      max-width: 650px;
-      font-size: 1.05rem;
-      margin-bottom: 30px;
+      margin-bottom: 28px;
     }
 
     .hero-actions {
       display: flex;
       flex-wrap: wrap;
-      gap: 14px;
-      margin-bottom: 35px;
+      gap: 12px;
     }
 
-    .btn {
-      padding: 14px 22px;
-      border-radius: 12px;
-      font-weight: 700;
-      transition: 0.25s ease;
-      display: inline-block;
-      border: 1px solid transparent;
-    }
-
-    .btn-primary {
-      background: linear-gradient(90deg, var(--primary), var(--accent));
-      color: white;
-      box-shadow: 0 10px 30px rgba(102, 179, 255, 0.25);
-    }
-
-    .btn-primary:hover {
-      transform: translateY(-2px);
-    }
-
-    .btn-secondary {
-      border-color: rgba(255, 255, 255, 0.16);
-      background: rgba(255, 255, 255, 0.04);
-      color: var(--text);
-    }
-
-    .btn-secondary:hover {
-      background: rgba(255, 255, 255, 0.08);
-    }
-
-    .stats {
-      display: grid;
-      grid-template-columns: repeat(3, minmax(100px, 1fr));
+    .hero-side {
+      display: flex;
+      flex-direction: column;
       gap: 16px;
-      margin-top: 20px;
     }
 
-    .stat {
-      background: var(--card);
-      border: 1px solid var(--card-border);
-      border-radius: 16px;
-      padding: 18px;
-      box-shadow: var(--shadow);
-    }
-
-    .stat h3 {
-      font-size: 1.5rem;
-      margin-bottom: 6px;
-      color: var(--primary-2);
-    }
-
-    .stat p {
-      margin: 0;
-      font-size: 0.9rem;
-      color: var(--muted);
-    }
-
-    .hero-card {
-      background: linear-gradient(180deg, rgba(255,255,255,0.1), rgba(255,255,255,0.04));
-      border: 1px solid var(--card-border);
+    .glass-card {
+      background: linear-gradient(180deg, rgba(255,255,255,0.05), rgba(255,255,255,0.02));
+      border: 1px solid var(--border);
       border-radius: 24px;
-      padding: 24px;
-      box-shadow: var(--shadow);
+      padding: 22px;
+    }
+
+    .glass-label {
+      font-size: 0.8rem;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--muted-2);
+      margin-bottom: 14px;
+    }
+
+    .glass-number {
+      font-size: 2.6rem;
+      line-height: 1;
+      letter-spacing: -0.05em;
+      margin-bottom: 10px;
+    }
+
+    .glass-copy {
+      color: var(--muted);
+      font-size: 0.95rem;
+    }
+
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 1.3fr 0.7fr;
+      gap: 18px;
+    }
+
+    .hero-panel {
+      min-height: 300px;
+      border: 1px solid var(--border);
+      border-radius: 28px;
+      background:
+        linear-gradient(180deg, rgba(255,255,255,0.04), rgba(255,255,255,0.015));
+      padding: 28px;
       position: relative;
       overflow: hidden;
     }
 
-    .hero-card::before {
+    .hero-panel::after {
       content: "";
       position: absolute;
-      top: -80px;
-      right: -50px;
-      width: 180px;
-      height: 180px;
-      background: radial-gradient(circle, rgba(126, 240, 255, 0.3), transparent 65%);
+      inset: auto -10% -35% auto;
+      width: 320px;
+      height: 320px;
       border-radius: 50%;
+      background: radial-gradient(circle, rgba(255,255,255,0.12), transparent 65%);
+      filter: blur(8px);
+      pointer-events: none;
     }
 
-    .panel {
-      background: rgba(8, 12, 24, 0.72);
-      border: 1px solid rgba(255,255,255,0.08);
-      border-radius: 18px;
-      padding: 18px;
-      margin-bottom: 16px;
+    .panel-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 26px;
     }
 
     .panel-title {
-      font-size: 0.95rem;
+      font-size: 1rem;
       color: var(--muted);
-      margin-bottom: 12px;
     }
 
-    .progress-row {
-      margin-bottom: 14px;
-    }
-
-    .progress-label {
-      display: flex;
-      justify-content: space-between;
-      font-size: 0.92rem;
-      margin-bottom: 8px;
-      color: #dfe7ff;
-    }
-
-    .progress-bar {
-      width: 100%;
-      height: 10px;
-      background: rgba(255,255,255,0.08);
+    .panel-tag {
+      border: 1px solid var(--border);
+      color: var(--muted);
+      padding: 6px 10px;
       border-radius: 999px;
-      overflow: hidden;
+      font-size: 0.8rem;
     }
 
-    .progress-fill {
-      height: 100%;
-      border-radius: 999px;
-      background: linear-gradient(90deg, var(--primary), var(--primary-2));
-    }
-
-    .grid-2 {
+    .metric-grid {
       display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 12px;
-    }
-
-    .mini-card {
-      background: rgba(255,255,255,0.04);
-      border: 1px solid rgba(255,255,255,0.08);
-      border-radius: 14px;
-      padding: 14px;
-    }
-
-    .mini-card strong {
-      display: block;
-      margin-bottom: 6px;
-      color: white;
-    }
-
-    section {
-      padding: 40px 0;
-    }
-
-    .section-title {
-      font-size: 2rem;
-      margin-bottom: 12px;
-    }
-
-    .section-subtitle {
-      color: var(--muted);
-      max-width: 720px;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 14px;
       margin-bottom: 28px;
     }
 
-    .features {
+    .metric {
+      border: 1px solid var(--border);
+      border-radius: 18px;
+      padding: 18px;
+      background: rgba(255,255,255,0.02);
+    }
+
+    .metric-value {
+      font-size: 1.9rem;
+      line-height: 1;
+      margin-bottom: 8px;
+      letter-spacing: -0.05em;
+    }
+
+    .metric-text {
+      color: var(--muted);
+      font-size: 0.9rem;
+    }
+
+    .signal-list {
+      display: grid;
+      gap: 12px;
+    }
+
+    .signal {
+      display: grid;
+      grid-template-columns: 140px 1fr 52px;
+      gap: 14px;
+      align-items: center;
+      font-size: 0.92rem;
+    }
+
+    .signal-name {
+      color: var(--muted);
+    }
+
+    .signal-bar {
+      position: relative;
+      height: 8px;
+      border-radius: 999px;
+      background: rgba(255,255,255,0.08);
+      overflow: hidden;
+    }
+
+    .signal-bar span {
+      position: absolute;
+      inset: 0 auto 0 0;
+      border-radius: inherit;
+      background: linear-gradient(90deg, rgba(255,255,255,0.95), rgba(255,255,255,0.35));
+    }
+
+    .signal-value {
+      text-align: right;
+      color: var(--text);
+    }
+
+    .stack-list {
+      display: grid;
+      gap: 12px;
+      height: 100%;
+      align-content: start;
+    }
+
+    .stack-item {
+      border: 1px solid var(--border);
+      border-radius: 18px;
+      padding: 18px;
+      background: rgba(255,255,255,0.02);
+    }
+
+    .stack-item strong {
+      display: block;
+      font-size: 1.02rem;
+      margin-bottom: 6px;
+    }
+
+    .stack-item p {
+      color: var(--muted);
+      font-size: 0.92rem;
+    }
+
+    .cards-3 {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
-      gap: 20px;
+      gap: 18px;
     }
 
     .feature-card {
-      background: var(--card);
-      border: 1px solid var(--card-border);
-      border-radius: var(--radius);
-      padding: 24px;
-      box-shadow: var(--shadow);
-      transition: 0.25s ease;
+      position: relative;
+      border: 1px solid var(--border);
+      border-radius: 28px;
+      padding: 28px;
+      background:
+        linear-gradient(180deg, rgba(255,255,255,0.04), rgba(255,255,255,0.02));
+      min-height: 260px;
+      transition: transform var(--transition), border-color var(--transition), background var(--transition);
     }
 
     .feature-card:hover {
-      transform: translateY(-6px);
-      border-color: rgba(126, 240, 255, 0.25);
+      transform: translateY(-4px);
+      border-color: var(--border-strong);
+      background: linear-gradient(180deg, rgba(255,255,255,0.06), rgba(255,255,255,0.025));
     }
 
-    .feature-icon {
-      width: 52px;
-      height: 52px;
-      border-radius: 14px;
-      display: grid;
-      place-items: center;
-      margin-bottom: 16px;
-      background: linear-gradient(135deg, rgba(102,179,255,0.22), rgba(124,92,255,0.18));
-      font-size: 1.4rem;
+    .feature-index {
+      font-size: 0.82rem;
+      color: var(--muted-2);
+      margin-bottom: 22px;
+      letter-spacing: 0.08em;
     }
 
     .feature-card h3 {
-      margin-bottom: 10px;
-      font-size: 1.15rem;
+      font-size: 1.35rem;
+      letter-spacing: -0.03em;
+      margin-bottom: 12px;
     }
 
     .feature-card p {
       color: var(--muted);
-      font-size: 0.96rem;
+      max-width: 38ch;
     }
 
-    .showcase {
+    .feature-foot {
+      position: absolute;
+      left: 28px;
+      right: 28px;
+      bottom: 24px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      color: var(--muted);
+      font-size: 0.9rem;
+    }
+
+    .split-grid {
       display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 24px;
+      grid-template-columns: 0.9fr 1.1fr;
+      gap: 18px;
     }
 
-    .showcase-card {
-      background: var(--card);
-      border: 1px solid var(--card-border);
-      border-radius: 24px;
-      padding: 28px;
-      box-shadow: var(--shadow);
+    .big-panel,
+    .list-panel {
+      border: 1px solid var(--border);
+      border-radius: 30px;
+      background: linear-gradient(180deg, rgba(255,255,255,0.04), rgba(255,255,255,0.02));
+      padding: 30px;
     }
 
-    .showcase-card h3 {
-      margin-bottom: 12px;
-      font-size: 1.3rem;
+    .big-panel h3,
+    .list-panel h3 {
+      font-size: 1.6rem;
+      letter-spacing: -0.04em;
+      margin-bottom: 14px;
     }
 
-    .showcase-card p,
-    .showcase-card li {
+    .big-panel p,
+    .list-panel p,
+    .list-panel li {
       color: var(--muted);
     }
 
-    .showcase-card ul {
-      padding-left: 18px;
-      margin-top: 14px;
+    .big-panel .quote {
+      margin-top: 28px;
+      padding-top: 22px;
+      border-top: 1px solid var(--border);
+      color: var(--text);
+      font-size: 1.08rem;
+      max-width: 34ch;
+    }
+
+    .list-panel ul {
+      list-style: none;
+      display: grid;
+      gap: 14px;
+      margin-top: 20px;
+    }
+
+    .list-panel li {
+      border: 1px solid var(--border);
+      border-radius: 18px;
+      padding: 16px 18px;
+      background: rgba(255,255,255,0.02);
+    }
+
+    .list-panel li strong {
+      display: block;
+      color: var(--text);
+      margin-bottom: 6px;
     }
 
     .cta {
-      margin: 30px 0 80px;
-      padding: 34px;
-      border-radius: 28px;
+      border: 1px solid var(--border);
+      border-radius: 34px;
       background:
-        linear-gradient(135deg, rgba(102,179,255,0.18), rgba(124,92,255,0.16)),
-        rgba(255,255,255,0.05);
-      border: 1px solid rgba(255,255,255,0.12);
-      box-shadow: var(--shadow);
+        radial-gradient(circle at center, rgba(255,255,255,0.08), transparent 45%),
+        linear-gradient(180deg, rgba(255,255,255,0.04), rgba(255,255,255,0.02));
+      padding: 44px 34px;
       display: flex;
       justify-content: space-between;
-      gap: 20px;
       align-items: center;
+      gap: 24px;
       flex-wrap: wrap;
+      overflow: hidden;
+      position: relative;
+    }
+
+    .cta::before {
+      content: "";
+      position: absolute;
+      width: 420px;
+      height: 420px;
+      right: -160px;
+      top: -160px;
+      background: radial-gradient(circle, rgba(255,255,255,0.08), transparent 65%);
+      border-radius: 50%;
+      pointer-events: none;
     }
 
     .cta h2 {
-      font-size: 1.8rem;
-      margin-bottom: 8px;
+      font-size: clamp(2rem, 4vw, 3.2rem);
+      line-height: 1;
+      letter-spacing: -0.05em;
+      margin-bottom: 12px;
+      max-width: 700px;
+      position: relative;
+      z-index: 1;
     }
 
     .cta p {
       color: var(--muted);
-      max-width: 720px;
+      max-width: 760px;
+      position: relative;
+      z-index: 1;
     }
 
     footer {
-      padding: 30px 0 50px;
-      border-top: 1px solid rgba(255,255,255,0.08);
+      padding: 36px 0 54px;
       color: var(--muted);
-      font-size: 0.92rem;
     }
 
     .footer-row {
+      border-top: 1px solid var(--border);
+      padding-top: 22px;
       display: flex;
       justify-content: space-between;
-      gap: 16px;
+      gap: 14px;
       flex-wrap: wrap;
+      font-size: 0.92rem;
     }
 
-    @media (max-width: 960px) {
+    @media (max-width: 1080px) {
+      .hero-top,
       .hero-grid,
-      .showcase,
-      .features {
+      .cards-3,
+      .split-grid {
         grid-template-columns: 1fr;
       }
 
+      .metric-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (max-width: 780px) {
       .nav-links {
         display: none;
       }
 
-      .stats {
-        grid-template-columns: 1fr;
-      }
-    }
-
-    @media (max-width: 640px) {
-      .hero {
-        padding-top: 60px;
+      .hero-inner {
+        padding: 56px 22px 22px;
       }
 
-      .hero h1 {
-        font-size: 2.2rem;
+      .section {
+        padding: 54px 0;
       }
 
-      .grid-2 {
+      .hero-title {
+        font-size: clamp(2.4rem, 15vw, 4.4rem);
+      }
+
+      .signal {
         grid-template-columns: 1fr;
       }
 
       .cta {
-        padding: 24px;
+        padding: 28px 22px;
       }
     }
   </style>
@@ -431,213 +643,255 @@
 <body>
   <header>
     <div class="container nav">
-      <div class="logo">AIO <span>TECH SOLUTION</span></div>
+      <a href="#" class="brand">
+        <span class="brand-mark"></span>
+        <span>AIO TECH SOLUTION</span>
+      </a>
+
       <nav class="nav-links">
-        <a href="#services">Services</a>
-        <a href="#solutions">Solutions</a>
-        <a href="#about">About</a>
+        <a href="#capabilities">Capabilities</a>
+        <a href="#systems">Systems</a>
+        <a href="#approach">Approach</a>
         <a href="#contact">Contact</a>
       </nav>
+
+      <div class="nav-actions">
+        <a class="btn btn-secondary" href="#systems">View Work</a>
+        <a class="btn btn-primary" href="#contact">Start</a>
+      </div>
     </div>
   </header>
 
   <main>
     <section class="hero">
-      <div class="container hero-grid">
-        <div>
-          <div class="eyebrow">Liu Bingxun • Engineering • AI • Digital Solutions</div>
-          <h1>
-            Smarter <span class="gradient">technology solutions</span> for modern businesses
-          </h1>
-          <p>
-            We design scalable digital platforms, automation workflows, and AI-driven
-            applications that help companies move faster, operate smarter, and create
-            measurable value.
-          </p>
-
-          <div class="hero-actions">
-            <a href="#contact" class="btn btn-primary">Start a Project</a>
-            <a href="#services" class="btn btn-secondary">Explore Services</a>
-          </div>
-
-          <div class="stats">
-            <div class="stat">
-              <h3>98%</h3>
-              <p>System reliability across deployed digital services</p>
-            </div>
-            <div class="stat">
-              <h3>24/7</h3>
-              <p>Operational support and continuous monitoring</p>
-            </div>
-            <div class="stat">
-              <h3>3x</h3>
-              <p>Faster internal workflows through automation</p>
-            </div>
-          </div>
-        </div>
-
-        <div class="hero-card">
-          <div class="panel">
-            <div class="panel-title">Project Performance Overview</div>
-
-            <div class="progress-row">
-              <div class="progress-label">
-                <span>Cloud Deployment</span>
-                <span>92%</span>
-              </div>
-              <div class="progress-bar">
-                <div class="progress-fill" style="width: 92%;"></div>
-              </div>
-            </div>
-
-            <div class="progress-row">
-              <div class="progress-label">
-                <span>Process Automation</span>
-                <span>84%</span>
-              </div>
-              <div class="progress-bar">
-                <div class="progress-fill" style="width: 84%;"></div>
-              </div>
-            </div>
-
-            <div class="progress-row">
-              <div class="progress-label">
-                <span>AI Integration</span>
-                <span>76%</span>
-              </div>
-              <div class="progress-bar">
-                <div class="progress-fill" style="width: 76%;"></div>
-              </div>
-            </div>
-          </div>
-
-          <div class="grid-2">
-            <div class="mini-card">
-              <strong>Automation</strong>
-              Intelligent pipelines for repetitive business processes.
-            </div>
-            <div class="mini-card">
-              <strong>Analytics</strong>
-              Real-time insights to support faster decisions.
-            </div>
-            <div class="mini-card">
-              <strong>Security</strong>
-              Stable, secure, and production-ready implementations.
-            </div>
-            <div class="mini-card">
-              <strong>Scalability</strong>
-              Architecture designed for future growth.
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <section id="services">
       <div class="container">
-        <h2 class="section-title">Core Services</h2>
-        <p class="section-subtitle">
-          AIO Tech Solution combines software engineering, intelligent automation,
-          and digital product design to build practical systems that solve real problems.
-        </p>
+        <div class="hero-shell">
+          <div class="hero-inner">
+            <div class="hero-top">
+              <div>
+                <div class="eyebrow">Engineering · AI · Digital Infrastructure</div>
+                <h1 class="hero-title">
+                  Build <span>systems</span><br />
+                  that feel<br />
+                  future-ready.
+                </h1>
+                <p class="hero-description">
+                  AIO Tech Solution designs high-clarity digital products, automation workflows,
+                  and AI-enabled business systems with a more premium technical aesthetic and a
+                  cleaner execution layer.
+                </p>
+                <div class="hero-actions">
+                  <a href="#contact" class="btn btn-primary">Start a Project</a>
+                  <a href="#capabilities" class="btn btn-secondary">Explore Capabilities</a>
+                </div>
+              </div>
 
-        <div class="features">
-          <div class="feature-card">
-            <div class="feature-icon">⚙️</div>
-            <h3>Custom Software Development</h3>
-            <p>
-              Tailored web platforms and business applications built for your workflow,
-              your team, and your growth strategy.
-            </p>
-          </div>
+              <div class="hero-side">
+                <div class="glass-card">
+                  <div class="glass-label">System Status</div>
+                  <div class="glass-number">24/7</div>
+                  <div class="glass-copy">
+                    Always-on delivery architecture with deployment-ready frontend systems,
+                    clean operations, and stable production execution.
+                  </div>
+                </div>
 
-          <div class="feature-card">
-            <div class="feature-icon">🤖</div>
-            <h3>AI & Automation</h3>
-            <p>
-              Smart automation for documents, internal operations, reporting,
-              and intelligent digital assistance.
-            </p>
-          </div>
+                <div class="glass-card">
+                  <div class="glass-label">Focus</div>
+                  <div class="glass-number">AI + Web</div>
+                  <div class="glass-copy">
+                    Product presentation, internal tools, automation, and premium-facing websites
+                    with a sharper visual language.
+                  </div>
+                </div>
+              </div>
+            </div>
 
-          <div class="feature-card">
-            <div class="feature-icon">☁️</div>
-            <h3>Cloud Deployment</h3>
-            <p>
-              Fast, secure, and scalable deployment using modern hosting,
-              CI/CD, and optimized performance practices.
-            </p>
+            <div class="hero-grid">
+              <div class="hero-panel">
+                <div class="panel-header">
+                  <div class="panel-title">Operational Signal Layer</div>
+                  <div class="panel-tag">Live Overview</div>
+                </div>
+
+                <div class="metric-grid">
+                  <div class="metric">
+                    <div class="metric-value">98%</div>
+                    <div class="metric-text">Interface clarity across key conversion surfaces</div>
+                  </div>
+                  <div class="metric">
+                    <div class="metric-value">3x</div>
+                    <div class="metric-text">Workflow acceleration through automation design</div>
+                  </div>
+                  <div class="metric">
+                    <div class="metric-value">Fast</div>
+                    <div class="metric-text">Modern delivery stack with lean deployment cycles</div>
+                  </div>
+                </div>
+
+                <div class="signal-list">
+                  <div class="signal">
+                    <div class="signal-name">Frontend systems</div>
+                    <div class="signal-bar"><span style="width: 92%;"></span></div>
+                    <div class="signal-value">92%</div>
+                  </div>
+                  <div class="signal">
+                    <div class="signal-name">Automation flows</div>
+                    <div class="signal-bar"><span style="width: 84%;"></span></div>
+                    <div class="signal-value">84%</div>
+                  </div>
+                  <div class="signal">
+                    <div class="signal-name">AI integration</div>
+                    <div class="signal-bar"><span style="width: 76%;"></span></div>
+                    <div class="signal-value">76%</div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="hero-panel">
+                <div class="panel-header">
+                  <div class="panel-title">Core Stack</div>
+                  <div class="panel-tag">AIO</div>
+                </div>
+
+                <div class="stack-list">
+                  <div class="stack-item">
+                    <strong>Premium web presence</strong>
+                    <p>Monochrome visual systems, strong hierarchy, and polished launch-ready pages.</p>
+                  </div>
+                  <div class="stack-item">
+                    <strong>Business automation</strong>
+                    <p>Operational pipelines that reduce repeated manual work and improve visibility.</p>
+                  </div>
+                  <div class="stack-item">
+                    <strong>Scalable delivery</strong>
+                    <p>Fast iteration from local development to hosted deployment under one clean workflow.</p>
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </div>
     </section>
 
-    <section id="solutions">
+    <section class="section" id="capabilities">
       <div class="container">
-        <h2 class="section-title">Solution Showcase</h2>
-        <p class="section-subtitle">
-          Example areas where our technology stack can be applied across startups,
-          engineering teams, and digital-first companies.
-        </p>
-
-        <div class="showcase">
-          <div class="showcase-card">
-            <h3>Business Websites & Digital Presence</h3>
-            <p>
-              Professional company websites with modern UI, responsive design,
-              lead-generation sections, and fast deployment workflows.
-            </p>
-            <ul>
-              <li>Responsive single-page or multi-page websites</li>
-              <li>Modern visual identity and conversion-focused layout</li>
-              <li>Hosting, custom domain, HTTPS, and deployment support</li>
-            </ul>
-          </div>
-
-          <div class="showcase-card">
-            <h3>AI-Enhanced Operations</h3>
-            <p>
-              Internal systems that reduce repetitive work and connect data,
-              documents, and decision processes more efficiently.
-            </p>
-            <ul>
-              <li>Workflow automation and dashboard integration</li>
-              <li>Report generation and task optimization</li>
-              <li>Scalable architecture for future AI extensions</li>
-            </ul>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <section id="about">
-      <div class="container">
-        <h2 class="section-title">About AIO Tech Solution</h2>
-        <p class="section-subtitle">
-          We focus on practical, elegant, and technically robust solutions.
-          Our approach combines clean implementation, clear structure,
-          and measurable business impact.
-        </p>
-      </div>
-    </section>
-
-    <section class="container">
-      <div class="cta" id="contact">
-        <div>
-          <h2>Ready to build something valuable?</h2>
-          <p>
-            Whether you need a stronger digital presence, an internal automation system,
-            or a modern technical solution, AIO Tech Solution can help turn ideas into deployment-ready products.
+        <div class="section-header">
+          <div class="eyebrow">Capabilities</div>
+          <h2 class="section-title">A sharper digital layer for serious products.</h2>
+          <p class="section-subtitle">
+            The current x.ai homepage uses a very restrained structure—few navigation items, large
+            statements, product-focused blocks, and minimal visual noise. This version follows that
+            same direction, but adapted for your own company positioning. :contentReference[oaicite:1]{index=1}
           </p>
         </div>
-        <a href="mailto:contact@aio-tech-solution.de" class="btn btn-primary">Contact Us</a>
+
+        <div class="cards-3">
+          <article class="feature-card">
+            <div class="feature-index">01 / Presence</div>
+            <h3>Company websites with premium visual control</h3>
+            <p>
+              High-contrast landing pages, strong typography, modern composition,
+              and a more executive-level design language.
+            </p>
+            <div class="feature-foot">
+              <span>Brand systems</span>
+              <span>→</span>
+            </div>
+          </article>
+
+          <article class="feature-card">
+            <div class="feature-index">02 / Automation</div>
+            <h3>Business logic turned into clean operational flows</h3>
+            <p>
+              From intake to reporting, repeated internal tasks can be simplified into structured,
+              scalable systems with less friction.
+            </p>
+            <div class="feature-foot">
+              <span>Process design</span>
+              <span>→</span>
+            </div>
+          </article>
+
+          <article class="feature-card">
+            <div class="feature-index">03 / Intelligence</div>
+            <h3>Applied AI without unnecessary complexity</h3>
+            <p>
+              Practical AI integration for search, summarization, decision support,
+              automation triggers, and data-facing interfaces.
+            </p>
+            <div class="feature-foot">
+              <span>Useful AI</span>
+              <span>→</span>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="systems">
+      <div class="container">
+        <div class="split-grid">
+          <div class="big-panel">
+            <div class="eyebrow">Systems</div>
+            <h3>Built to move from concept to deployment with less noise.</h3>
+            <p>
+              Local development, version control, live deployment, custom domain, HTTPS,
+              and public launch are already the exact workflow you have set up with GitHub,
+              Vercel, and your IONOS domain.
+            </p>
+            <div class="quote">
+              “Minimal surface. Strong execution. Clear technical identity.”
+            </div>
+          </div>
+
+          <div class="list-panel">
+            <div class="eyebrow">Use Cases</div>
+            <h3>Where this design language works especially well</h3>
+            <ul>
+              <li>
+                <strong>AI / engineering consultancies</strong>
+                Dark premium presentation with concise positioning and technical trust.
+              </li>
+              <li>
+                <strong>Startup launch pages</strong>
+                Fast product communication with stronger visual credibility.
+              </li>
+              <li>
+                <strong>Internal tool platforms</strong>
+                Structured dashboards, panels, data modules, and operational visibility.
+              </li>
+              <li>
+                <strong>Portfolio and innovation pages</strong>
+                A cleaner way to present research, prototypes, or technical capability.
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="container">
+        <div class="cta" id="contact">
+          <div>
+            <h2>Design the next version with more depth.</h2>
+            <p>
+              This is already much closer to a premium x.ai-inspired visual direction:
+              monochrome palette, oversized type, restrained navigation, bordered panels,
+              and a higher-end landing-page rhythm.
+            </p>
+          </div>
+          <a href="mailto:contact@aio-tech-solution.de" class="btn btn-primary">contact@aio-tech-solution.de</a>
+        </div>
       </div>
     </section>
   </main>
 
   <footer>
     <div class="container footer-row">
-      <div>© 2026 AIO Tech Solution. All rights reserved.</div>
+      <div>© 2026 AIO Tech Solution</div>
       <div>aio-tech-solution.de</div>
     </div>
   </footer>
