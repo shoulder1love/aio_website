@@ -1,0 +1,645 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>AIO Tech Solution</title>
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    :root {
+      --bg: #0b1020;
+      --bg-soft: #11182d;
+      --card: rgba(255, 255, 255, 0.08);
+      --card-border: rgba(255, 255, 255, 0.12);
+      --text: #f5f7ff;
+      --muted: #b7c0d8;
+      --primary: #66b3ff;
+      --primary-2: #7ef0ff;
+      --accent: #7c5cff;
+      --shadow: 0 20px 50px rgba(0, 0, 0, 0.35);
+      --radius: 20px;
+      --max-width: 1200px;
+    }
+
+    body {
+      font-family: Arial, Helvetica, sans-serif;
+      background:
+        radial-gradient(circle at top left, rgba(124, 92, 255, 0.25), transparent 30%),
+        radial-gradient(circle at top right, rgba(102, 179, 255, 0.22), transparent 25%),
+        linear-gradient(135deg, #09101f 0%, #0f1630 45%, #0a1224 100%);
+      color: var(--text);
+      line-height: 1.6;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    .container {
+      width: min(92%, var(--max-width));
+      margin: 0 auto;
+    }
+
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      backdrop-filter: blur(14px);
+      background: rgba(11, 16, 32, 0.65);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    }
+
+    .nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 18px 0;
+    }
+
+    .logo {
+      font-size: 1.25rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+    }
+
+    .logo span {
+      color: var(--primary-2);
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 28px;
+      color: var(--muted);
+      font-size: 0.95rem;
+    }
+
+    .nav-links a:hover {
+      color: var(--text);
+    }
+
+    .hero {
+      padding: 90px 0 70px;
+    }
+
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 1.2fr 0.8fr;
+      gap: 40px;
+      align-items: center;
+    }
+
+    .eyebrow {
+      display: inline-block;
+      padding: 8px 14px;
+      border: 1px solid rgba(126, 240, 255, 0.25);
+      background: rgba(126, 240, 255, 0.08);
+      color: var(--primary-2);
+      border-radius: 999px;
+      font-size: 0.85rem;
+      margin-bottom: 20px;
+    }
+
+    .hero h1 {
+      font-size: clamp(2.4rem, 5vw, 4.6rem);
+      line-height: 1.08;
+      margin-bottom: 20px;
+    }
+
+    .hero h1 .gradient {
+      background: linear-gradient(90deg, var(--primary), var(--primary-2), #ffffff);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .hero p {
+      color: var(--muted);
+      max-width: 650px;
+      font-size: 1.05rem;
+      margin-bottom: 30px;
+    }
+
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 14px;
+      margin-bottom: 35px;
+    }
+
+    .btn {
+      padding: 14px 22px;
+      border-radius: 12px;
+      font-weight: 700;
+      transition: 0.25s ease;
+      display: inline-block;
+      border: 1px solid transparent;
+    }
+
+    .btn-primary {
+      background: linear-gradient(90deg, var(--primary), var(--accent));
+      color: white;
+      box-shadow: 0 10px 30px rgba(102, 179, 255, 0.25);
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-2px);
+    }
+
+    .btn-secondary {
+      border-color: rgba(255, 255, 255, 0.16);
+      background: rgba(255, 255, 255, 0.04);
+      color: var(--text);
+    }
+
+    .btn-secondary:hover {
+      background: rgba(255, 255, 255, 0.08);
+    }
+
+    .stats {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(100px, 1fr));
+      gap: 16px;
+      margin-top: 20px;
+    }
+
+    .stat {
+      background: var(--card);
+      border: 1px solid var(--card-border);
+      border-radius: 16px;
+      padding: 18px;
+      box-shadow: var(--shadow);
+    }
+
+    .stat h3 {
+      font-size: 1.5rem;
+      margin-bottom: 6px;
+      color: var(--primary-2);
+    }
+
+    .stat p {
+      margin: 0;
+      font-size: 0.9rem;
+      color: var(--muted);
+    }
+
+    .hero-card {
+      background: linear-gradient(180deg, rgba(255,255,255,0.1), rgba(255,255,255,0.04));
+      border: 1px solid var(--card-border);
+      border-radius: 24px;
+      padding: 24px;
+      box-shadow: var(--shadow);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero-card::before {
+      content: "";
+      position: absolute;
+      top: -80px;
+      right: -50px;
+      width: 180px;
+      height: 180px;
+      background: radial-gradient(circle, rgba(126, 240, 255, 0.3), transparent 65%);
+      border-radius: 50%;
+    }
+
+    .panel {
+      background: rgba(8, 12, 24, 0.72);
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 18px;
+      padding: 18px;
+      margin-bottom: 16px;
+    }
+
+    .panel-title {
+      font-size: 0.95rem;
+      color: var(--muted);
+      margin-bottom: 12px;
+    }
+
+    .progress-row {
+      margin-bottom: 14px;
+    }
+
+    .progress-label {
+      display: flex;
+      justify-content: space-between;
+      font-size: 0.92rem;
+      margin-bottom: 8px;
+      color: #dfe7ff;
+    }
+
+    .progress-bar {
+      width: 100%;
+      height: 10px;
+      background: rgba(255,255,255,0.08);
+      border-radius: 999px;
+      overflow: hidden;
+    }
+
+    .progress-fill {
+      height: 100%;
+      border-radius: 999px;
+      background: linear-gradient(90deg, var(--primary), var(--primary-2));
+    }
+
+    .grid-2 {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 12px;
+    }
+
+    .mini-card {
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 14px;
+      padding: 14px;
+    }
+
+    .mini-card strong {
+      display: block;
+      margin-bottom: 6px;
+      color: white;
+    }
+
+    section {
+      padding: 40px 0;
+    }
+
+    .section-title {
+      font-size: 2rem;
+      margin-bottom: 12px;
+    }
+
+    .section-subtitle {
+      color: var(--muted);
+      max-width: 720px;
+      margin-bottom: 28px;
+    }
+
+    .features {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+    }
+
+    .feature-card {
+      background: var(--card);
+      border: 1px solid var(--card-border);
+      border-radius: var(--radius);
+      padding: 24px;
+      box-shadow: var(--shadow);
+      transition: 0.25s ease;
+    }
+
+    .feature-card:hover {
+      transform: translateY(-6px);
+      border-color: rgba(126, 240, 255, 0.25);
+    }
+
+    .feature-icon {
+      width: 52px;
+      height: 52px;
+      border-radius: 14px;
+      display: grid;
+      place-items: center;
+      margin-bottom: 16px;
+      background: linear-gradient(135deg, rgba(102,179,255,0.22), rgba(124,92,255,0.18));
+      font-size: 1.4rem;
+    }
+
+    .feature-card h3 {
+      margin-bottom: 10px;
+      font-size: 1.15rem;
+    }
+
+    .feature-card p {
+      color: var(--muted);
+      font-size: 0.96rem;
+    }
+
+    .showcase {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 24px;
+    }
+
+    .showcase-card {
+      background: var(--card);
+      border: 1px solid var(--card-border);
+      border-radius: 24px;
+      padding: 28px;
+      box-shadow: var(--shadow);
+    }
+
+    .showcase-card h3 {
+      margin-bottom: 12px;
+      font-size: 1.3rem;
+    }
+
+    .showcase-card p,
+    .showcase-card li {
+      color: var(--muted);
+    }
+
+    .showcase-card ul {
+      padding-left: 18px;
+      margin-top: 14px;
+    }
+
+    .cta {
+      margin: 30px 0 80px;
+      padding: 34px;
+      border-radius: 28px;
+      background:
+        linear-gradient(135deg, rgba(102,179,255,0.18), rgba(124,92,255,0.16)),
+        rgba(255,255,255,0.05);
+      border: 1px solid rgba(255,255,255,0.12);
+      box-shadow: var(--shadow);
+      display: flex;
+      justify-content: space-between;
+      gap: 20px;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+
+    .cta h2 {
+      font-size: 1.8rem;
+      margin-bottom: 8px;
+    }
+
+    .cta p {
+      color: var(--muted);
+      max-width: 720px;
+    }
+
+    footer {
+      padding: 30px 0 50px;
+      border-top: 1px solid rgba(255,255,255,0.08);
+      color: var(--muted);
+      font-size: 0.92rem;
+    }
+
+    .footer-row {
+      display: flex;
+      justify-content: space-between;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+
+    @media (max-width: 960px) {
+      .hero-grid,
+      .showcase,
+      .features {
+        grid-template-columns: 1fr;
+      }
+
+      .nav-links {
+        display: none;
+      }
+
+      .stats {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (max-width: 640px) {
+      .hero {
+        padding-top: 60px;
+      }
+
+      .hero h1 {
+        font-size: 2.2rem;
+      }
+
+      .grid-2 {
+        grid-template-columns: 1fr;
+      }
+
+      .cta {
+        padding: 24px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="container nav">
+      <div class="logo">AIO <span>TECH SOLUTION</span></div>
+      <nav class="nav-links">
+        <a href="#services">Services</a>
+        <a href="#solutions">Solutions</a>
+        <a href="#about">About</a>
+        <a href="#contact">Contact</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div class="container hero-grid">
+        <div>
+          <div class="eyebrow">Liu Bingxun • Engineering • AI • Digital Solutions</div>
+          <h1>
+            Smarter <span class="gradient">technology solutions</span> for modern businesses
+          </h1>
+          <p>
+            We design scalable digital platforms, automation workflows, and AI-driven
+            applications that help companies move faster, operate smarter, and create
+            measurable value.
+          </p>
+
+          <div class="hero-actions">
+            <a href="#contact" class="btn btn-primary">Start a Project</a>
+            <a href="#services" class="btn btn-secondary">Explore Services</a>
+          </div>
+
+          <div class="stats">
+            <div class="stat">
+              <h3>98%</h3>
+              <p>System reliability across deployed digital services</p>
+            </div>
+            <div class="stat">
+              <h3>24/7</h3>
+              <p>Operational support and continuous monitoring</p>
+            </div>
+            <div class="stat">
+              <h3>3x</h3>
+              <p>Faster internal workflows through automation</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="hero-card">
+          <div class="panel">
+            <div class="panel-title">Project Performance Overview</div>
+
+            <div class="progress-row">
+              <div class="progress-label">
+                <span>Cloud Deployment</span>
+                <span>92%</span>
+              </div>
+              <div class="progress-bar">
+                <div class="progress-fill" style="width: 92%;"></div>
+              </div>
+            </div>
+
+            <div class="progress-row">
+              <div class="progress-label">
+                <span>Process Automation</span>
+                <span>84%</span>
+              </div>
+              <div class="progress-bar">
+                <div class="progress-fill" style="width: 84%;"></div>
+              </div>
+            </div>
+
+            <div class="progress-row">
+              <div class="progress-label">
+                <span>AI Integration</span>
+                <span>76%</span>
+              </div>
+              <div class="progress-bar">
+                <div class="progress-fill" style="width: 76%;"></div>
+              </div>
+            </div>
+          </div>
+
+          <div class="grid-2">
+            <div class="mini-card">
+              <strong>Automation</strong>
+              Intelligent pipelines for repetitive business processes.
+            </div>
+            <div class="mini-card">
+              <strong>Analytics</strong>
+              Real-time insights to support faster decisions.
+            </div>
+            <div class="mini-card">
+              <strong>Security</strong>
+              Stable, secure, and production-ready implementations.
+            </div>
+            <div class="mini-card">
+              <strong>Scalability</strong>
+              Architecture designed for future growth.
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="services">
+      <div class="container">
+        <h2 class="section-title">Core Services</h2>
+        <p class="section-subtitle">
+          AIO Tech Solution combines software engineering, intelligent automation,
+          and digital product design to build practical systems that solve real problems.
+        </p>
+
+        <div class="features">
+          <div class="feature-card">
+            <div class="feature-icon">⚙️</div>
+            <h3>Custom Software Development</h3>
+            <p>
+              Tailored web platforms and business applications built for your workflow,
+              your team, and your growth strategy.
+            </p>
+          </div>
+
+          <div class="feature-card">
+            <div class="feature-icon">🤖</div>
+            <h3>AI & Automation</h3>
+            <p>
+              Smart automation for documents, internal operations, reporting,
+              and intelligent digital assistance.
+            </p>
+          </div>
+
+          <div class="feature-card">
+            <div class="feature-icon">☁️</div>
+            <h3>Cloud Deployment</h3>
+            <p>
+              Fast, secure, and scalable deployment using modern hosting,
+              CI/CD, and optimized performance practices.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="solutions">
+      <div class="container">
+        <h2 class="section-title">Solution Showcase</h2>
+        <p class="section-subtitle">
+          Example areas where our technology stack can be applied across startups,
+          engineering teams, and digital-first companies.
+        </p>
+
+        <div class="showcase">
+          <div class="showcase-card">
+            <h3>Business Websites & Digital Presence</h3>
+            <p>
+              Professional company websites with modern UI, responsive design,
+              lead-generation sections, and fast deployment workflows.
+            </p>
+            <ul>
+              <li>Responsive single-page or multi-page websites</li>
+              <li>Modern visual identity and conversion-focused layout</li>
+              <li>Hosting, custom domain, HTTPS, and deployment support</li>
+            </ul>
+          </div>
+
+          <div class="showcase-card">
+            <h3>AI-Enhanced Operations</h3>
+            <p>
+              Internal systems that reduce repetitive work and connect data,
+              documents, and decision processes more efficiently.
+            </p>
+            <ul>
+              <li>Workflow automation and dashboard integration</li>
+              <li>Report generation and task optimization</li>
+              <li>Scalable architecture for future AI extensions</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="about">
+      <div class="container">
+        <h2 class="section-title">About AIO Tech Solution</h2>
+        <p class="section-subtitle">
+          We focus on practical, elegant, and technically robust solutions.
+          Our approach combines clean implementation, clear structure,
+          and measurable business impact.
+        </p>
+      </div>
+    </section>
+
+    <section class="container">
+      <div class="cta" id="contact">
+        <div>
+          <h2>Ready to build something valuable?</h2>
+          <p>
+            Whether you need a stronger digital presence, an internal automation system,
+            or a modern technical solution, AIO Tech Solution can help turn ideas into deployment-ready products.
+          </p>
+        </div>
+        <a href="mailto:contact@aio-tech-solution.de" class="btn btn-primary">Contact Us</a>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container footer-row">
+      <div>© 2026 AIO Tech Solution. All rights reserved.</div>
+      <div>aio-tech-solution.de</div>
+    </div>
+  </footer>
+</body>
+</html>
